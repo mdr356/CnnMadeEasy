@@ -4,13 +4,21 @@ from ultralytics import YOLO
 # Load a pre-trained model (let's use the nano version for speed)
 model = YOLO('yolov8n.pt')
 
+import cv2
+
+for i in range(10):
+    cap = cv2.VideoCapture(i)
+    if cap.isOpened():
+        print(f"Camera index {i} is available")
+        cap.release()
+
 print("Starting webcam detection...")
 print("Point your webcam at different objects and watch the magic!")
 print("Press 'q' to quit")
 
 # Real-time detection on webcam
 results = model.predict(
-    source=0,           # 0 = default webcam
+    source=1,           # 0 = default webcam
     show=True,       # Display results in a window
     conf=0.5,           # Confidence threshold (only show detections with 50%+ confidence)
     save=False,      # Don't save every frame (we're just watching)
